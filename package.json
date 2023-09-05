@@ -1,0 +1,14 @@
+{
+  "name": "com.gilzoide.tween-jobs",
+  "displayName": "Tween Jobs",
+  "version": "1.0.0-preview1",
+  "description": "Jobified Tween engine",
+  "homepage": "https://github.com/gilzoide/unity-tween-jobs",
+  "license": "Unlicense",
+  "author": {
+    "name": "Gil Barbosa Reis"
+  },
+  "dependencies": {
+    "com.gilzoide.update-manager": "1.4.0"
+  }
+}
