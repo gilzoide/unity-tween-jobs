@@ -146,16 +146,25 @@ namespace Gilzoide.TweenJobs
 
         public abstract T Value { get; set; }
 
-        public TweenJob<T, TValueMath> InitialJobData => new TweenJob<T, TValueMath>
+        public TweenJob<T, TValueMath> InitialJobData
         {
-            From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from,
-            To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to,
-            Duration = Duration,
-            Speed = Speed,
-            UseUnscaledDeltaTime = UseUnscaledDeltaTime,
-            Time = _time ?? (Speed >= 0 ? 0 : Duration),
-            EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
-        };
+            get
+            {
+                var jobData = new TweenJob<T, TValueMath>
+                {
+                    From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from,
+                    To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to,
+                    Duration = Duration,
+                    Speed = Speed,
+                    UseUnscaledDeltaTime = UseUnscaledDeltaTime,
+                    Time = _time ?? (Speed >= 0 ? 0 : Duration),
+                    EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
+                };
+                _time = null;
+                _isDirty = false;
+                return jobData;
+            }
+        }
 
         public bool IsPlaying => this.IsRegisteredInManager();
 
