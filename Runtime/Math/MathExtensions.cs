@@ -1,7 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Gilzoide.TweenJobs
+namespace Gilzoide.TweenJobs.Math
 {
     public static class MathExtensions
     {

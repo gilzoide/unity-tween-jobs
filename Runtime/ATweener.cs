@@ -1,4 +1,5 @@
 using System;
+using Gilzoide.TweenJobs.Math;
 using Gilzoide.UpdateManager.Jobs;
 using Gilzoide.UpdateManager.Jobs.Internal;
 using UnityEngine;

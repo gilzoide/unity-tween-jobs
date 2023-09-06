@@ -1,8 +1,8 @@
 using AOT;
 using Unity.Burst;
-using Math = UnityEngine.Mathf;
+using Unity.Mathematics;
 
-namespace Gilzoide.TweenJobs
+namespace Gilzoide.TweenJobs.Math
 {
     // Code taken from: https://github.com/acron0/Easings/blob/master/Easings.cs
     [BurstCompile]
@@ -13,12 +13,12 @@ namespace Gilzoide.TweenJobs
         /// <summary>
         /// Constant Pi.
         /// </summary>
-        public const float PI = Math.PI;
+        public const float PI = math.PI;
 
         /// <summary>
         /// Constant Pi / 2.
         /// </summary>
-        public const float HALFPI = Math.PI / 2.0f;
+        public const float HALFPI = math.PI / 2.0f;
 
         /// <summary>
         /// Easing Functions enumeration
@@ -307,7 +307,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> SineEaseInFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(SineEaseIn);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float SineEaseIn(float p)
         {
-            return Math.Sin((p - 1) * HALFPI) + 1;
+            return math.sin((p - 1) * HALFPI) + 1;
         }
 
         /// <summary>
@@ -316,7 +316,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> SineEaseOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(SineEaseOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float SineEaseOut(float p)
         {
-            return Math.Sin(p * HALFPI);
+            return math.sin(p * HALFPI);
         }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> SineEaseInOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(SineEaseInOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float SineEaseInOut(float p)
         {
-            return 0.5f * (1 - Math.Cos(p * PI));
+            return 0.5f * (1 - math.cos(p * PI));
         }
 
         /// <summary>
@@ -334,7 +334,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> CircularEaseInFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(CircularEaseIn);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float CircularEaseIn(float p)
         {
-            return 1 - Math.Sqrt(1 - (p * p));
+            return 1 - math.sqrt(1 - (p * p));
         }
 
         /// <summary>
@@ -343,24 +343,24 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> CircularEaseOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(CircularEaseOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float CircularEaseOut(float p)
         {
-            return Math.Sqrt((2 - p) * p);
+            return math.sqrt((2 - p) * p);
         }
 
         /// <summary>
         /// Modeled after the piecewise circular function
-        /// y = (1/2)(1 - Math.Sqrt(1 - 4x^2))           ; [0, 0.5)
-        /// y = (1/2)(Math.Sqrt(-(2x - 3)*(2x - 1)) + 1) ; [0.5, 1]
+        /// y = (1/2)(1 - math.sqrt(1 - 4x^2))           ; [0, 0.5)
+        /// y = (1/2)(math.sqrt(-(2x - 3)*(2x - 1)) + 1) ; [0.5, 1]
         /// </summary>
         public static readonly FunctionPointer<EasingFunctionDelegate> CircularEaseInOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(CircularEaseInOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float CircularEaseInOut(float p)
         {
             if(p < 0.5f)
             {
-                return 0.5f * (1 - Math.Sqrt(1 - 4 * (p * p)));
+                return 0.5f * (1 - math.sqrt(1 - 4 * (p * p)));
             }
             else
             {
-                return 0.5f * (Math.Sqrt(-((2 * p) - 3) * ((2 * p) - 1)) + 1);
+                return 0.5f * (math.sqrt(-((2 * p) - 3) * ((2 * p) - 1)) + 1);
             }
         }
 
@@ -370,7 +370,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> ExponentialEaseInFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(ExponentialEaseIn);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float ExponentialEaseIn(float p)
         {
-            return (p == 0.0f) ? p : Math.Pow(2, 10 * (p - 1));
+            return (p == 0.0f) ? p : math.pow(2, 10 * (p - 1));
         }
 
         /// <summary>
@@ -379,7 +379,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> ExponentialEaseOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(ExponentialEaseOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float ExponentialEaseOut(float p)
         {
-            return (p == 1.0f) ? p : 1 - Math.Pow(2, -10 * p);
+            return (p == 1.0f) ? p : 1 - math.pow(2, -10 * p);
         }
 
         /// <summary>
@@ -394,47 +394,47 @@ namespace Gilzoide.TweenJobs
 
             if(p < 0.5f)
             {
-                return 0.5f * Math.Pow(2, (20 * p) - 10);
+                return 0.5f * math.pow(2, (20 * p) - 10);
             }
             else
             {
-                return -0.5f * Math.Pow(2, (-20 * p) + 10) + 1;
+                return -0.5f * math.pow(2, (-20 * p) + 10) + 1;
             }
         }
 
         /// <summary>
-        /// Modeled after the damped sine wave y = sin(13pi/2*x)*Math.Pow(2, 10 * (x - 1))
+        /// Modeled after the damped sine wave y = sin(13pi/2*x)*math.pow(2, 10 * (x - 1))
         /// </summary>
         public static readonly FunctionPointer<EasingFunctionDelegate> ElasticEaseInFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(ElasticEaseIn);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float ElasticEaseIn(float p)
         {
-            return Math.Sin(13 * HALFPI * p) * Math.Pow(2, 10 * (p - 1));
+            return math.sin(13 * HALFPI * p) * math.pow(2, 10 * (p - 1));
         }
 
         /// <summary>
-        /// Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*Math.Pow(2, -10x) + 1
+        /// Modeled after the damped sine wave y = sin(-13pi/2*(x + 1))*math.pow(2, -10x) + 1
         /// </summary>
         public static readonly FunctionPointer<EasingFunctionDelegate> ElasticEaseOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(ElasticEaseOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float ElasticEaseOut(float p)
         {
-            return Math.Sin(-13 * HALFPI * (p + 1)) * Math.Pow(2, -10 * p) + 1;
+            return math.sin(-13 * HALFPI * (p + 1)) * math.pow(2, -10 * p) + 1;
         }
 
         /// <summary>
         /// Modeled after the piecewise exponentially-damped sine wave:
-        /// y = (1/2)*sin(13pi/2*(2*x))*Math.Pow(2, 10 * ((2*x) - 1))      ; [0,0.5)
-        /// y = (1/2)*(sin(-13pi/2*((2x-1)+1))*Math.Pow(2,-10(2*x-1)) + 2) ; [0.5, 1]
+        /// y = (1/2)*sin(13pi/2*(2*x))*math.pow(2, 10 * ((2*x) - 1))      ; [0,0.5)
+        /// y = (1/2)*(sin(-13pi/2*((2x-1)+1))*math.pow(2,-10(2*x-1)) + 2) ; [0.5, 1]
         /// </summary>
         public static readonly FunctionPointer<EasingFunctionDelegate> ElasticEaseInOutFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(ElasticEaseInOut);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float ElasticEaseInOut(float p)
         {
             if(p < 0.5f)
             {
-                return 0.5f * Math.Sin(13 * HALFPI * (2 * p)) * Math.Pow(2, 10 * ((2 * p) - 1));
+                return 0.5f * math.sin(13 * HALFPI * (2 * p)) * math.pow(2, 10 * ((2 * p) - 1));
             }
             else
             {
-                return 0.5f * (Math.Sin(-13 * HALFPI * ((2 * p - 1) + 1)) * Math.Pow(2, -10 * (2 * p - 1)) + 2);
+                return 0.5f * (math.sin(-13 * HALFPI * ((2 * p - 1) + 1)) * math.pow(2, -10 * (2 * p - 1)) + 2);
             }
         }
 
@@ -444,7 +444,7 @@ namespace Gilzoide.TweenJobs
         public static readonly FunctionPointer<EasingFunctionDelegate> BackEaseInFunctionPointer = BurstCompiler.CompileFunctionPointer<EasingFunctionDelegate>(BackEaseIn);
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float BackEaseIn(float p)
         {
-            return p * p * p - p * Math.Sin(p * PI);
+            return p * p * p - p * math.sin(p * PI);
         }
 
         /// <summary>
@@ -454,7 +454,7 @@ namespace Gilzoide.TweenJobs
         [BurstCompile, MonoPInvokeCallback(typeof(EasingFunctionDelegate))] static public float BackEaseOut(float p)
         {
             float f = (1 - p);
-            return 1 - (f * f * f - f * Math.Sin(f * PI));
+            return 1 - (f * f * f - f * math.sin(f * PI));
         }
 
         /// <summary>
@@ -468,12 +468,12 @@ namespace Gilzoide.TweenJobs
             if(p < 0.5f)
             {
                 float f = 2 * p;
-                return 0.5f * (f * f * f - f * Math.Sin(f * PI));
+                return 0.5f * (f * f * f - f * math.sin(f * PI));
             }
             else
             {
                 float f = (1 - (2*p - 1));
-                return 0.5f * (1 - (f * f * f - f * Math.Sin(f * PI))) + 0.5f;
+                return 0.5f * (1 - (f * f * f - f * math.sin(f * PI))) + 0.5f;
             }
         }
 

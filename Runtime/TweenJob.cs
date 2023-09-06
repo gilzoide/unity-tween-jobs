@@ -1,3 +1,4 @@
+using Gilzoide.TweenJobs.Math;
 using Gilzoide.UpdateManager.Jobs;
 using Unity.Burst;
 using Unity.Mathematics;
