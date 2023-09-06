@@ -86,6 +86,18 @@ namespace Gilzoide.TweenJobs
                 }
             }
         }
+        public bool UseUnscaledDeltaTime
+        {
+            get => _useUnscaledDeltaTime;
+            set
+            {
+                if (_useUnscaledDeltaTime != value)
+                {
+                    _useUnscaledDeltaTime = value;
+                    _isDirty = true;
+                }
+            }
+        }
         public Easings.Functions EasingFunction
         {
             get => _easingFunction;
@@ -105,6 +117,7 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected bool _isRelative;
         [SerializeField, Min(0)] protected float _duration = 1;
         [SerializeField] protected float _timeScale = 1;
+        [SerializeField] public bool _useUnscaledDeltaTime = false;
         [SerializeField] protected Easings.Functions _easingFunction;
 
         protected bool _isDirty;
@@ -120,6 +133,7 @@ namespace Gilzoide.TweenJobs
             To = _isRelative ? _valueMath.Add(_initialValue, _to) : _to,
             Duration = Duration,
             TimeScale = TimeScale,
+            UseUnscaledDeltaTime = UseUnscaledDeltaTime,
             Time = _time ?? 0,
             EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
         };
@@ -167,6 +181,7 @@ namespace Gilzoide.TweenJobs
                     jobData.To = _isRelative ? _valueMath.Add(_initialValue, _to) : _to;
                     jobData.Duration = Duration;
                     jobData.TimeScale = TimeScale;
+                    jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
                     jobData.EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction);
                     if (_time is float time)
                     {
