@@ -24,6 +24,8 @@ namespace Gilzoide.TweenJobs
         public abstract void PlayForward();
         public abstract void PlayBackward();
         public abstract void Pause();
+        public abstract void Unpause();
+        public abstract void Complete();
         public abstract void Rewind();
     }
 
@@ -49,6 +51,14 @@ namespace Gilzoide.TweenJobs
         public override void Pause()
         {
             Tweener.Pause();
+        }
+        public override void Unpause()
+        {
+            Tweener.Unpause();
+        }
+         public override void Complete()
+        {
+            Tweener.Complete();
         }
         public override void Rewind()
         {

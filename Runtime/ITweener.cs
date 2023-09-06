@@ -7,6 +7,8 @@ namespace Gilzoide.TweenJobs
         void PlayForward();
         void PlayBackward();
         void Pause();
+        void Unpause();
+        void Complete();
         void Rewind();
     }
 }

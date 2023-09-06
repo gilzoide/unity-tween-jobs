@@ -161,14 +161,8 @@ namespace Gilzoide.TweenJobs
 
         public void Play()
         {
-            if (Duration > 0)
-            {
-                this.RegisterInManager(true);
-            }
-            else
-            {
-                Value = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
-            }
+            _time = null;
+            Unpause();
         }
 
         public void PlayForward()
@@ -191,13 +185,47 @@ namespace Gilzoide.TweenJobs
 
         public void Pause()
         {
-            this.UnregisterInManager();
+            if (IsPlaying)
+            {
+                _time = Time;
+                this.UnregisterInManager();
+            }
+        }
+
+        public void Unpause()
+        {
+            if (Duration > 0)
+            {
+                this.RegisterInManager(true);
+            }
+            else
+            {
+                Complete();
+            }
         }
 
         public void Rewind()
         {
-            Time = 0;
-            Apply();
+            _time = null;
+            this.UnregisterInManager();
+            T firstValue = Speed >= 0 ? _from : _to;
+            if (IsRelative)
+            {
+                firstValue = _valueMath.Add(InitialValue, firstValue);
+            }
+            Value = firstValue;
+        }
+
+        public void Complete()
+        {
+            _time = null;
+            this.UnregisterInManager();
+            T finalValue = Speed >= 0 ? _to : _from;
+            if (IsRelative)
+            {
+                finalValue = _valueMath.Add(InitialValue, finalValue);
+            }
+            Value = finalValue;
         }
 
         public void SyncJobData(ref TweenJob<T, TValueMath> jobData)
@@ -208,32 +236,20 @@ namespace Gilzoide.TweenJobs
                 Pause();
                 OnComplete?.Invoke();
             }
-            else
+            else if (_isDirty)
             {
-                if (_isDirty)
+                _isDirty = false;
+                jobData.From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from;
+                jobData.To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
+                jobData.Duration = Duration;
+                jobData.Speed = Speed;
+                jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
+                jobData.EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction);
+                if (_time is float time)
                 {
-                    _isDirty = false;
-                    jobData.From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from;
-                    jobData.To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
-                    jobData.Duration = Duration;
-                    jobData.Speed = Speed;
-                    jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
-                    jobData.EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction);
-                    if (_time is float time)
-                    {
-                        jobData.Time = time;
-                    }
+                    jobData.Time = time;
+                    _time = null;
                 }
-            }
-        }
-
-        private void Apply()
-        {
-            if (!IsPlaying)
-            {
-                var job = InitialJobData;
-                job.Execute();
-                Value = job.Value;
             }
         }
     }
