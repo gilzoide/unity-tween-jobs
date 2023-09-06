@@ -38,21 +38,21 @@ namespace Gilzoide.TweenJobs
                 }
             }
         }
-        public T InitialValue
+        public T ReferenceValue
         {
             get
             {
-                if (_initialValue == null)
+                if (_referenceValue == null)
                 {
-                    _initialValue = Value;
+                    _referenceValue = Value;
                 }
-                return _initialValue.Value;
+                return _referenceValue.Value;
             }
             set
             {
-                if (!_initialValue.Equals(value))
+                if (!_referenceValue.Equals(value))
                 {
-                    _initialValue = value;
+                    _referenceValue = value;
                     _isDirty = true;
                 }
             }
@@ -140,7 +140,7 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected Easings.Functions _easingFunction;
 
         protected bool _isDirty;
-        protected T? _initialValue;
+        protected T? _referenceValue;
         protected TValueMath _valueMath;
         protected float? _time;
 
@@ -152,8 +152,8 @@ namespace Gilzoide.TweenJobs
             {
                 var jobData = new TweenJob<T, TValueMath>
                 {
-                    From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from,
-                    To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to,
+                    From = _isRelative ? _valueMath.Add(ReferenceValue, _from) : _from,
+                    To = _isRelative ? _valueMath.Add(ReferenceValue, _to) : _to,
                     Duration = Duration,
                     Speed = Speed,
                     UseUnscaledDeltaTime = UseUnscaledDeltaTime,
@@ -220,7 +220,7 @@ namespace Gilzoide.TweenJobs
             T firstValue = Speed >= 0 ? _from : _to;
             if (IsRelative)
             {
-                firstValue = _valueMath.Add(InitialValue, firstValue);
+                firstValue = _valueMath.Add(ReferenceValue, firstValue);
             }
             Value = firstValue;
         }
@@ -232,7 +232,7 @@ namespace Gilzoide.TweenJobs
             T finalValue = Speed >= 0 ? _to : _from;
             if (IsRelative)
             {
-                finalValue = _valueMath.Add(InitialValue, finalValue);
+                finalValue = _valueMath.Add(ReferenceValue, finalValue);
             }
             Value = finalValue;
         }
@@ -248,8 +248,8 @@ namespace Gilzoide.TweenJobs
             else if (_isDirty)
             {
                 _isDirty = false;
-                jobData.From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from;
-                jobData.To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
+                jobData.From = _isRelative ? _valueMath.Add(ReferenceValue, _from) : _from;
+                jobData.To = _isRelative ? _valueMath.Add(ReferenceValue, _to) : _to;
                 jobData.Duration = Duration;
                 jobData.Speed = Speed;
                 jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
