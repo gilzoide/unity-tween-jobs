@@ -144,6 +144,7 @@ namespace Gilzoide.TweenJobs
 
         public void SyncJobData(ref TweenJob<T, TValueMath> jobData)
         {
+            Value = jobData.Value;
             if (jobData.IsComplete)
             {
                 Pause();
@@ -151,7 +152,6 @@ namespace Gilzoide.TweenJobs
             }
             else
             {
-                Value = jobData.Value;
                 if (_isDirty)
                 {
                     _isDirty = false;

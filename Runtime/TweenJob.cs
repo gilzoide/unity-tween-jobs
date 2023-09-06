@@ -1,5 +1,6 @@
 using Gilzoide.UpdateManager.Jobs;
 using Unity.Burst;
+using Unity.Mathematics;
 
 namespace Gilzoide.TweenJobs
 {
@@ -22,7 +23,7 @@ namespace Gilzoide.TweenJobs
         public void Execute()
         {
             Time += TimeScale * UpdateJobTime.deltaTime;
-            Progress = EasingFunctionPointer.Invoke(Time / Duration);
+            Progress = math.clamp(EasingFunctionPointer.Invoke(Time / Duration), 0, 1);
             Value = _valueMath.Interpolate(From, To, Progress);
         }
     }
