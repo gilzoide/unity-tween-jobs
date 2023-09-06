@@ -38,6 +38,25 @@ namespace Gilzoide.TweenJobs
                 }
             }
         }
+        public T InitialValue
+        {
+            get
+            {
+                if (_initialValue == null)
+                {
+                    _initialValue = Value;
+                }
+                return _initialValue.Value;
+            }
+            set
+            {
+                if (!_initialValue.Equals(value))
+                {
+                    _initialValue = value;
+                    _isDirty = true;
+                }
+            }
+        }
         public bool IsRelative
         {
             get => _isRelative;
@@ -121,7 +140,7 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected Easings.Functions _easingFunction;
 
         protected bool _isDirty;
-        protected T _initialValue;
+        protected T? _initialValue;
         protected TValueMath _valueMath;
         protected float? _time;
 
@@ -129,8 +148,8 @@ namespace Gilzoide.TweenJobs
 
         public TweenJob<T, TValueMath> InitialJobData => new TweenJob<T, TValueMath>
         {
-            From = _isRelative ? _valueMath.Add(_initialValue, _from) : _from,
-            To = _isRelative ? _valueMath.Add(_initialValue, _to) : _to,
+            From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from,
+            To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to,
             Duration = Duration,
             Speed = Speed,
             UseUnscaledDeltaTime = UseUnscaledDeltaTime,
@@ -142,14 +161,13 @@ namespace Gilzoide.TweenJobs
 
         public void Play()
         {
-            _initialValue = Value;
             if (Duration > 0)
             {
                 this.RegisterInManager(true);
             }
             else
             {
-                Value = _isRelative ? _valueMath.Add(_initialValue, _to) : _to;
+                Value = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
             }
         }
 
@@ -177,8 +195,8 @@ namespace Gilzoide.TweenJobs
                 if (_isDirty)
                 {
                     _isDirty = false;
-                    jobData.From = _isRelative ? _valueMath.Add(_initialValue, _from) : _from;
-                    jobData.To = _isRelative ? _valueMath.Add(_initialValue, _to) : _to;
+                    jobData.From = _isRelative ? _valueMath.Add(InitialValue, _from) : _from;
+                    jobData.To = _isRelative ? _valueMath.Add(InitialValue, _to) : _to;
                     jobData.Duration = Duration;
                     jobData.Speed = Speed;
                     jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
