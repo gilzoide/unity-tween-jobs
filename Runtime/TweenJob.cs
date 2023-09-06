@@ -28,7 +28,7 @@ namespace Gilzoide.TweenJobs
             Time += Speed * deltaTime;
             Progress = math.clamp(EasingFunctionPointer.Invoke(Time / Duration), 0, 1);
             Value = _valueMath.Interpolate(From, To, Progress);
-            IsComplete = Speed >= 0 ? Time >= Duration : Time < 0;
+            IsComplete = Speed >= 0 ? Time >= Duration : Time <= 0;
         }
     }
 }
