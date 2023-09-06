@@ -7,7 +7,8 @@ namespace Gilzoide.TweenJobs
 {
     [Serializable]
     public abstract class ATweener<T, TValueMath, TJob> : IJobUpdatable<TweenJob<T, TValueMath>, TJob>,
-        IJobDataSynchronizer<TweenJob<T, TValueMath>>
+        IJobDataSynchronizer<TweenJob<T, TValueMath>>,
+        ITweener
         where T : struct, IEquatable<T>
         where TValueMath : struct, IValueMath<T>
         where TJob : struct, IInternalUpdateJob<TweenJob<T, TValueMath>>
