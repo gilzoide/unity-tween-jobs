@@ -102,7 +102,7 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected T _from;
         [SerializeField] protected T _to;
         [SerializeField] protected bool _isRelative;
-        [SerializeField] protected float _duration = 1;
+        [SerializeField, Min(0)] protected float _duration = 1;
         [SerializeField] protected float _timeScale = 1;
         [SerializeField] protected Easings.Functions _easingFunction;
 
@@ -128,7 +128,14 @@ namespace Gilzoide.TweenJobs
         public void Play()
         {
             _initialValue = Value;
-            this.RegisterInManager(true);
+            if (Duration > 0)
+            {
+                this.RegisterInManager(true);
+            }
+            else
+            {
+                Value = _isRelative ? _valueMath.Add(_initialValue, _to) : _to;
+            }
         }
 
         public void Pause()
