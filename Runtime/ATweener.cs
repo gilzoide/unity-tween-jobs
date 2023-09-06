@@ -118,6 +118,7 @@ namespace Gilzoide.TweenJobs
             To = _isRelative ? _valueMath.Add(_initialValue, _to) : _to,
             Duration = Duration,
             TimeScale = TimeScale,
+            Time = _time ?? 0,
             EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
         };
 
@@ -137,6 +138,7 @@ namespace Gilzoide.TweenJobs
         public void Rewind()
         {
             Time = 0;
+            Apply();
         }
 
         public void SyncJobData(ref TweenJob<T, TValueMath> jobData)
@@ -162,6 +164,16 @@ namespace Gilzoide.TweenJobs
                         jobData.Time = time;
                     }
                 }
+            }
+        }
+
+        private void Apply()
+        {
+            if (!IsPlaying)
+            {
+                var job = InitialJobData;
+                job.Execute();
+                Value = job.Value;
             }
         }
     }

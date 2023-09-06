@@ -1,7 +1,5 @@
-using System;
 using Gilzoide.UpdateManager.Jobs;
 using Unity.Burst;
-using UnityEngine;
 
 namespace Gilzoide.TweenJobs
 {
