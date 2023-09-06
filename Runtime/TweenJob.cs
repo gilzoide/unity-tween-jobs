@@ -12,7 +12,7 @@ namespace Gilzoide.TweenJobs
         public T From;
         public T To;
         public float Duration;
-        public float TimeScale;
+        public float Speed;
         public bool UseUnscaledDeltaTime;
         public FunctionPointer<Easings.EasingFunctionDelegate> EasingFunctionPointer;
         public float Time { get; set; }
@@ -25,7 +25,7 @@ namespace Gilzoide.TweenJobs
         public void Execute()
         {
             float deltaTime = UseUnscaledDeltaTime ? UpdateJobTime.unscaledDeltaTime : UpdateJobTime.deltaTime;
-            Time += TimeScale * deltaTime;
+            Time += Speed * deltaTime;
             Progress = math.clamp(EasingFunctionPointer.Invoke(Time / Duration), 0, 1);
             Value = _valueMath.Interpolate(From, To, Progress);
         }
