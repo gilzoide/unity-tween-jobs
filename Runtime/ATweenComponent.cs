@@ -4,14 +4,19 @@ namespace Gilzoide.TweenJobs
 {
     public abstract class ATweenComponent : MonoBehaviour, ITweener
     {
-        public bool PlayOnStart = true;
+        public bool PlayOnEnable = true;
 
-        void Start()
+        protected virtual void OnEnable()
         {
-            if (PlayOnStart)
+            if (PlayOnEnable)
             {
                 Play();
             }
+        }
+
+        protected virtual void OnDestroy()
+        {
+            Pause();
         }
 
         public abstract bool IsPlaying { get; }
