@@ -18,7 +18,7 @@ namespace Gilzoide.TweenJobs
         public float Time { get; set; }
         public float Progress { get; private set; }
         public T Value { get; private set; }
-        public bool IsComplete => Time >= Duration;
+        public bool IsComplete { get; private set; }
 
         private readonly TValueMath _valueMath;
 
@@ -28,6 +28,7 @@ namespace Gilzoide.TweenJobs
             Time += Speed * deltaTime;
             Progress = math.clamp(EasingFunctionPointer.Invoke(Time / Duration), 0, 1);
             Value = _valueMath.Interpolate(From, To, Progress);
+            IsComplete = Speed >= 0 ? Time >= Duration : Time < 0;
         }
     }
 }

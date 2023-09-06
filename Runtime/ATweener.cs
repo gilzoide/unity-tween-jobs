@@ -134,7 +134,7 @@ namespace Gilzoide.TweenJobs
             Duration = Duration,
             Speed = Speed,
             UseUnscaledDeltaTime = UseUnscaledDeltaTime,
-            Time = _time ?? 0,
+            Time = _time ?? (Speed >= 0 ? 0 : Duration),
             EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
         };
 
