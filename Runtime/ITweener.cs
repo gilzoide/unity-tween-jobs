@@ -4,6 +4,8 @@ namespace Gilzoide.TweenJobs
     {
         bool IsPlaying { get; }
         void Play();
+        void PlayForward();
+        void PlayBackward();
         void Pause();
         void Rewind();
     }

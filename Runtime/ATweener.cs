@@ -171,6 +171,24 @@ namespace Gilzoide.TweenJobs
             }
         }
 
+        public void PlayForward()
+        {
+            if (Speed < 0)
+            {
+                Speed = -Speed;
+            }
+            Play();
+        }
+
+        public void PlayBackward()
+        {
+            if (Speed > 0)
+            {
+                Speed = -Speed;
+            }
+            Play();
+        }
+
         public void Pause()
         {
             this.UnregisterInManager();
