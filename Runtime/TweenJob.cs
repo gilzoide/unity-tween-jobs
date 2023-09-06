@@ -26,7 +26,8 @@ namespace Gilzoide.TweenJobs
         {
             float deltaTime = UseUnscaledDeltaTime ? UpdateJobTime.unscaledDeltaTime : UpdateJobTime.deltaTime;
             Time += Speed * deltaTime;
-            Progress = math.clamp(EasingFunctionPointer.Invoke(Time / Duration), 0, 1);
+            Time = math.clamp(Time, 0, Duration);
+            Progress = EasingFunctionPointer.Invoke(Time / Duration);
             Value = _valueMath.Interpolate(From, To, Progress);
             IsComplete = Speed >= 0 ? Time >= Duration : Time <= 0;
         }
