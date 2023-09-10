@@ -15,9 +15,12 @@ namespace Gilzoide.TweenJobs
         public float Speed;
         public bool UseUnscaledDeltaTime;
         public FunctionPointer<Easings.EasingFunctionDelegate> EasingFunctionPointer;
+        public int LoopCount;
+        public LoopType LoopType;
         public float Time { get; set; }
         public float Progress { get; private set; }
         public T Value { get; private set; }
+        public int LoopIndex { get; private set; }
         public bool IsComplete { get; private set; }
 
         private readonly TValueMath _valueMath;
@@ -26,10 +29,20 @@ namespace Gilzoide.TweenJobs
         {
             float deltaTime = UseUnscaledDeltaTime ? UpdateJobTime.unscaledDeltaTime : UpdateJobTime.deltaTime;
             Time += Speed * deltaTime;
-            Time = math.clamp(Time, 0, Duration);
-            Progress = EasingFunctionPointer.Invoke(Time / Duration);
-            Value = _valueMath.Interpolate(From, To, Progress);
-            IsComplete = Speed >= 0 ? Time >= Duration : Time <= 0;
+            LoopIndex = (int) (math.abs(Time) / Duration);
+            if (LoopCount >= 0 && LoopIndex > LoopCount)
+            {
+                Progress = Speed >= 0 ? 1 : 0;
+                Value = Speed >= 0 ? To : From;
+                IsComplete = true;
+            }
+            else
+            {
+                float time = LoopType.LoopValue(Time, Duration);
+                Progress = EasingFunctionPointer.Invoke(time / Duration);
+                Value = _valueMath.Interpolate(From, To, Progress);
+                IsComplete = false;
+            }
         }
     }
 }

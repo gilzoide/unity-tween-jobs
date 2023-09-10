@@ -22,7 +22,7 @@ namespace Gilzoide.TweenJobs
                 if (!_from.Equals(value))
                 {
                     _from = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace Gilzoide.TweenJobs
                 if (!_to.Equals(value))
                 {
                     _to = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -53,7 +53,7 @@ namespace Gilzoide.TweenJobs
                 if (!_referenceValue.Equals(value))
                 {
                     _referenceValue = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -65,7 +65,7 @@ namespace Gilzoide.TweenJobs
                 if (_isRelative != value)
                 {
                     _isRelative = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -77,7 +77,7 @@ namespace Gilzoide.TweenJobs
                 if (_duration != value)
                 {
                     _duration = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -89,7 +89,7 @@ namespace Gilzoide.TweenJobs
                 if (_speed != value)
                 {
                     _speed = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -101,7 +101,7 @@ namespace Gilzoide.TweenJobs
                 if (_time != value)
                 {
                     _time = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -113,7 +113,7 @@ namespace Gilzoide.TweenJobs
                 if (_useUnscaledDeltaTime != value)
                 {
                     _useUnscaledDeltaTime = value;
-                    _isDirty = true;
+                    SetDirty();
                 }
             }
         }
@@ -125,7 +125,31 @@ namespace Gilzoide.TweenJobs
                 if (_easingFunction != value)
                 {
                     _easingFunction = value;
-                    _isDirty = true;
+                    SetDirty();
+                }
+            }
+        }
+        public int LoopCount
+        {
+            get => _loopCount;
+            set
+            {
+                if (_loopCount != value)
+                {
+                    _loopCount = value;
+                    SetDirty();
+                }
+            }
+        }
+        public LoopType LoopType
+        {
+            get => _loopType;
+            set
+            {
+                if (_loopType != value)
+                {
+                    _loopType = value;
+                    SetDirty();
                 }
             }
         }
@@ -136,10 +160,12 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected bool _isRelative;
         [SerializeField, Min(0)] protected float _duration = 1;
         [SerializeField] protected float _speed = 1;
-        [SerializeField] public bool _useUnscaledDeltaTime = false;
+        [SerializeField] protected bool _useUnscaledDeltaTime = false;
         [SerializeField] protected Easings.Functions _easingFunction;
+        [SerializeField] protected int _loopCount;
+        [SerializeField] protected LoopType _loopType;
 
-        protected bool _isDirty;
+        private bool _isDirty;
         protected T? _referenceValue;
         protected TValueMath _valueMath;
         protected float? _time;
@@ -157,7 +183,9 @@ namespace Gilzoide.TweenJobs
                     Duration = Duration,
                     Speed = Speed,
                     UseUnscaledDeltaTime = UseUnscaledDeltaTime,
-                    Time = _time ?? (Speed >= 0 ? 0 : Duration),
+                    Time = _time ?? 0,
+                    LoopCount = LoopCount,
+                    LoopType = LoopType,
                     EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction),
                 };
                 _time = null;
@@ -260,6 +288,11 @@ namespace Gilzoide.TweenJobs
                     _time = null;
                 }
             }
+        }
+
+        protected internal void SetDirty()
+        {
+            _isDirty = true;
         }
     }
 
