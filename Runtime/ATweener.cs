@@ -14,6 +14,8 @@ namespace Gilzoide.TweenJobs
         where TValueMath : struct, IValueMath<T>
         where TJob : struct, IInternalUpdateJob<TweenJob<T, TValueMath>>
     {
+        public static readonly TValueMath ValueMath;
+
         public T From
         {
             get => _from;
@@ -167,7 +169,6 @@ namespace Gilzoide.TweenJobs
 
         private bool _isDirty;
         protected T? _referenceValue;
-        protected TValueMath _valueMath;
         protected float? _time;
 
         public abstract T Value { get; set; }
@@ -178,8 +179,8 @@ namespace Gilzoide.TweenJobs
             {
                 var jobData = new TweenJob<T, TValueMath>
                 {
-                    From = _isRelative ? _valueMath.Add(ReferenceValue, _from) : _from,
-                    To = _isRelative ? _valueMath.Add(ReferenceValue, _to) : _to,
+                    From = _isRelative ? ValueMath.Add(ReferenceValue, _from) : _from,
+                    To = _isRelative ? ValueMath.Add(ReferenceValue, _to) : _to,
                     Duration = Duration,
                     Speed = Speed,
                     UseUnscaledDeltaTime = UseUnscaledDeltaTime,
@@ -248,7 +249,7 @@ namespace Gilzoide.TweenJobs
             T firstValue = Speed >= 0 ? _from : _to;
             if (IsRelative)
             {
-                firstValue = _valueMath.Add(ReferenceValue, firstValue);
+                firstValue = ValueMath.Add(ReferenceValue, firstValue);
             }
             Value = firstValue;
         }
@@ -260,7 +261,7 @@ namespace Gilzoide.TweenJobs
             T finalValue = Speed >= 0 ? _to : _from;
             if (IsRelative)
             {
-                finalValue = _valueMath.Add(ReferenceValue, finalValue);
+                finalValue = ValueMath.Add(ReferenceValue, finalValue);
             }
             Value = finalValue;
         }
@@ -276,8 +277,8 @@ namespace Gilzoide.TweenJobs
             else if (_isDirty)
             {
                 _isDirty = false;
-                jobData.From = _isRelative ? _valueMath.Add(ReferenceValue, _from) : _from;
-                jobData.To = _isRelative ? _valueMath.Add(ReferenceValue, _to) : _to;
+                jobData.From = _isRelative ? ValueMath.Add(ReferenceValue, _from) : _from;
+                jobData.To = _isRelative ? ValueMath.Add(ReferenceValue, _to) : _to;
                 jobData.Duration = Duration;
                 jobData.Speed = Speed;
                 jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;

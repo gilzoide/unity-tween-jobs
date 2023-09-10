@@ -9,6 +9,8 @@ namespace Gilzoide.TweenJobs
         where T : struct
         where TValueMath : struct, IValueMath<T>
     {
+        public static readonly TValueMath ValueMath;
+
         public T From;
         public T To;
         public float Duration;
@@ -22,8 +24,6 @@ namespace Gilzoide.TweenJobs
         public T Value { get; private set; }
         public int LoopIndex { get; private set; }
         public bool IsComplete { get; private set; }
-
-        private readonly TValueMath _valueMath;
 
         public void Execute()
         {
@@ -40,7 +40,7 @@ namespace Gilzoide.TweenJobs
             {
                 float time = LoopType.LoopValue(Time, Duration);
                 Progress = EasingFunctionPointer.Invoke(time / Duration);
-                Value = _valueMath.Interpolate(From, To, Progress);
+                Value = ValueMath.Interpolate(From, To, Progress);
                 IsComplete = false;
             }
         }
