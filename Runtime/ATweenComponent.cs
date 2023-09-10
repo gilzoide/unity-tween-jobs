@@ -7,6 +7,8 @@ namespace Gilzoide.TweenJobs
         public TweenCommand ActionOnEnable = TweenCommand.Unpause;
         public TweenCommand ActionOnDisable = TweenCommand.Pause;
 
+        public abstract ITweener GetTweener();
+
         protected virtual void OnEnable()
         {
             this.ExecuteCommand(ActionOnEnable);
@@ -22,14 +24,63 @@ namespace Gilzoide.TweenJobs
             Pause();
         }
 
-        public abstract bool IsPlaying { get; }
-        public abstract void Play();
-        public abstract void PlayForward();
-        public abstract void PlayBackward();
-        public abstract void Pause();
-        public abstract void Unpause();
-        public abstract void Complete();
-        public abstract void Rewind();
+        public bool IsPlaying => GetTweener().IsPlaying;
+
+        [ContextMenu("Play")]
+        public void Play()
+        {
+            GetTweener().Play();
+        }
+
+        [ContextMenu("Play Forward")]
+        public void PlayForward()
+        {
+            GetTweener().PlayForward();
+        }
+
+        [ContextMenu("Play Backward")]
+        public void PlayBackward()
+        {
+            GetTweener().PlayBackward();
+        }
+
+        [ContextMenu("Pause")]
+        public void Pause()
+        {
+            GetTweener().Pause();
+        }
+
+        [ContextMenu("Unpause")]
+        public void Unpause()
+        {
+            GetTweener().Unpause();
+        }
+
+        [ContextMenu("Complete")]
+        public void Complete()
+        {
+            GetTweener().Complete();
+        }
+
+        [ContextMenu("Rewind")]
+        public void Rewind()
+        {
+            GetTweener().Rewind();
+        }
+
+#if UNITY_EDITOR
+        [ContextMenu("Play", isValidateFunction: true)]
+        [ContextMenu("Play Forward", isValidateFunction: true)]
+        [ContextMenu("Play Backward", isValidateFunction: true)]
+        [ContextMenu("Pause", isValidateFunction: true)]
+        [ContextMenu("Unpause", isValidateFunction: true)]
+        [ContextMenu("Complete", isValidateFunction: true)]
+        [ContextMenu("Rewind", isValidateFunction: true)]
+        private bool ValidateContextMenuItems()
+        {
+            return Application.isPlaying;
+        }
+#endif
     }
 
     public abstract class ATweenComponent<TTweener> : ATweenComponent
@@ -37,35 +88,6 @@ namespace Gilzoide.TweenJobs
     {
         public TTweener Tweener;
 
-        public override bool IsPlaying => Tweener.IsPlaying;
-
-        public override void Play()
-        {
-            Tweener.Play();
-        }
-        public override void PlayForward()
-        {
-            Tweener.PlayForward();
-        }
-        public override void PlayBackward()
-        {
-            Tweener.PlayBackward();
-        }
-        public override void Pause()
-        {
-            Tweener.Pause();
-        }
-        public override void Unpause()
-        {
-            Tweener.Unpause();
-        }
-         public override void Complete()
-        {
-            Tweener.Complete();
-        }
-        public override void Rewind()
-        {
-            Tweener.Rewind();
-        }
+        public override ITweener GetTweener() => Tweener;
     }
 }
