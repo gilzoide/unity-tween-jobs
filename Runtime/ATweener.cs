@@ -164,7 +164,7 @@ namespace Gilzoide.TweenJobs
         [SerializeField] protected float _speed = 1;
         [SerializeField] protected bool _useUnscaledDeltaTime = false;
         [SerializeField] protected Easings.Functions _easingFunction;
-        [SerializeField] protected int _loopCount;
+        [SerializeField, Min(-1)] protected int _loopCount;
         [SerializeField] protected LoopType _loopType;
 
         private bool _isDirty;
@@ -283,6 +283,8 @@ namespace Gilzoide.TweenJobs
                 jobData.Speed = Speed;
                 jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
                 jobData.EasingFunctionPointer = Easings.GetFunctionPointer(_easingFunction);
+                jobData.LoopCount = LoopCount;
+                jobData.LoopType = LoopType;
                 if (_time is float time)
                 {
                     jobData.Time = time;
