@@ -2,7 +2,7 @@
   "name": "com.gilzoide.tween-jobs",
   "displayName": "Tween Jobs",
   "version": "1.0.0-preview1",
-  "description": "Jobified Tween engine",
+  "description": "Tween engine for Unity based on the C# Job System",
   "homepage": "https://github.com/gilzoide/unity-tween-jobs",
   "license": "Unlicense",
   "author": {
