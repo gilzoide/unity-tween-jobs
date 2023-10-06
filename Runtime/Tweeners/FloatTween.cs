@@ -8,6 +8,10 @@ namespace Gilzoide.TweenJobs
         public Func<float> GetValue;
         public Action<float> SetValue;
 
+        public FloatTweener()
+        {
+        }
+
         public FloatTweener(Func<float> getValue, Action<float> setValue)
         {
             GetValue = getValue;

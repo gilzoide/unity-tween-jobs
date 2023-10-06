@@ -9,6 +9,10 @@ namespace Gilzoide.TweenJobs
         public Func<Quaternion> GetValue;
         public Action<Quaternion> SetValue;
 
+        public QuaternionTweener()
+        {
+        }
+
         public QuaternionTweener(Func<Quaternion> getValue, Action<Quaternion> setValue)
         {
             GetValue = getValue;

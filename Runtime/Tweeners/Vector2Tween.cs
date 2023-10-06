@@ -9,6 +9,10 @@ namespace Gilzoide.TweenJobs
         public Func<Vector2> GetValue;
         public Action<Vector2> SetValue;
 
+        public Vector2Tweener()
+        {
+        }
+
         public Vector2Tweener(Func<Vector2> getValue, Action<Vector2> setValue)
         {
             GetValue = getValue;

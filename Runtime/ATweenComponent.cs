@@ -92,9 +92,9 @@ namespace Gilzoide.TweenJobs
     }
 
     public abstract class ATweenComponent<TTweener> : ATweenComponent
-        where TTweener : ITweener
+        where TTweener : ITweener, new()
     {
-        public TTweener Tweener;
+        public TTweener Tweener = new TTweener();
 
         public override ITweener GetTweener() => Tweener;
     }

@@ -9,6 +9,10 @@ namespace Gilzoide.TweenJobs
         public Func<Color> GetValue;
         public Action<Color> SetValue;
 
+        public ColorTweener()
+        {
+        }
+
         public ColorTweener(Func<Color> getValue, Action<Color> setValue)
         {
             GetValue = getValue;
