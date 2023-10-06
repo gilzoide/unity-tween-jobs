@@ -25,6 +25,32 @@ namespace Gilzoide.TweenJobs
         public int LoopIndex { get; private set; }
         public bool IsComplete { get; private set; }
 
+        public float FinalProgress
+        {
+            get
+            {
+                if (LoopType == LoopType.PingPong && LoopCount > 0)
+                {
+                    if (LoopCount % 2 == 0)
+                    {
+                        return 1;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                }
+                else if (Speed >= 0)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+
         public void Execute()
         {
             float deltaTime = UseUnscaledDeltaTime ? UpdateJobTime.unscaledDeltaTime : UpdateJobTime.deltaTime;
@@ -32,17 +58,16 @@ namespace Gilzoide.TweenJobs
             LoopIndex = (int) (math.abs(Time) / Duration);
             if (LoopCount >= 0 && LoopIndex > LoopCount)
             {
-                Progress = Speed >= 0 ? 1 : 0;
-                Value = Speed >= 0 ? To : From;
+                Progress = FinalProgress;
                 IsComplete = true;
             }
             else
             {
                 float time = LoopType.LoopValue(Time, Duration);
                 Progress = EasingFunctionPointer.Invoke(time / Duration);
-                Value = ValueMath.Interpolate(From, To, Progress);
                 IsComplete = false;
             }
+            Value = ValueMath.Interpolate(From, To, Progress);
         }
     }
 }
