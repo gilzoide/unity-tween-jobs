@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Gilzoide.TweenJobs.Tweeners
 {
     [Serializable]
-    public class MoveTweener : AVector3Tweener
+    public class PositionTweener : AVector3Tweener
     {
         public Transform Target;
 
@@ -15,7 +15,7 @@ namespace Gilzoide.TweenJobs.Tweeners
         }
     }
 
-    public class MoveTween : ATweenComponent<MoveTweener>
+    public class PositionTween : ATweenComponent<PositionTweener>
     {
     }
 }
