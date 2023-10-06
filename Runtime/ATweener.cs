@@ -9,7 +9,8 @@ namespace Gilzoide.TweenJobs
     [Serializable]
     public abstract class ATweener<T, TValueMath, TJob> : IJobUpdatable<TweenJob<T, TValueMath>, TJob>,
         IJobDataSynchronizer<TweenJob<T, TValueMath>>,
-        ITweener
+        ITweener,
+        IValidatable
         where T : struct, IEquatable<T>
         where TValueMath : struct, IValueMath<T>
         where TJob : struct, IInternalUpdateJob<TweenJob<T, TValueMath>>
@@ -292,6 +293,13 @@ namespace Gilzoide.TweenJobs
                 }
             }
         }
+
+#if UNITY_EDITOR
+        public void OnValidate()
+        {
+            SetDirty();
+        }
+#endif
 
         protected internal void SetDirty()
         {

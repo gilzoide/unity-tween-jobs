@@ -80,6 +80,14 @@ namespace Gilzoide.TweenJobs
         {
             return Application.isPlaying;
         }
+
+        protected virtual void OnValidate()
+        {
+            if (GetTweener() is IValidatable validatable)
+            {
+                validatable.OnValidate();
+            }
+        }
 #endif
     }
 
