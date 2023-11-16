@@ -5,7 +5,7 @@ using Unity.Mathematics;
 
 namespace Gilzoide.TweenJobs
 {
-    public struct TweenJob<T, TValueMath> : IUpdateJob
+    public struct TweenJob<T, TValueMath> : IBurstUpdateJob<BurstUpdateJob<TweenJob<T, TValueMath>>>
         where T : struct
         where TValueMath : struct, IValueMath<T>
     {

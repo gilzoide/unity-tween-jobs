@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gilzoide.TweenJobs
 {
     [Serializable]
-    public abstract class ATweener<T, TValueMath, TJob> : IJobUpdatable<TweenJob<T, TValueMath>, TJob>,
+    public abstract class ATweener<T, TValueMath, TJob> : IJobUpdatable<TweenJob<T, TValueMath>>,
         IJobDataSynchronizer<TweenJob<T, TValueMath>>,
         ITweener,
         IValidatable
