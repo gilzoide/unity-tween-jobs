@@ -14,3 +14,4 @@ Tween engine for Unity based on the C# Job System.
 ## Dependencies
 - [Update Manager](https://github.com/gilzoide/unity-update-manager): Update Manager is used to manage tween jobs
 - [Burst](https://docs.unity3d.com/Packages/com.unity.burst@1.8/manual/index.html): used to compile jobs
+- [Unity Mathematics](https://docs.unity3d.com/Packages/com.unity.mathematics@1.3/manual/index.html): math library
