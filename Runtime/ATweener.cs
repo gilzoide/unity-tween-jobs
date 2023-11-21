@@ -306,27 +306,11 @@ namespace Gilzoide.TweenJobs
         }
     }
 
-    public abstract class AFloatTweener : ATweener<float, FloatMath, BurstUpdateJob<TweenJob<float, FloatMath>>>
-    {
-    }
-
-    public abstract class AVector2Tweener : ATweener<Vector2, Vector2Math, BurstUpdateJob<TweenJob<Vector2, Vector2Math>>>
-    {
-    }
-
-    public abstract class AVector3Tweener : ATweener<Vector3, Vector3Math, BurstUpdateJob<TweenJob<Vector3, Vector3Math>>>
-    {
-    }
-
-    public abstract class AVector4Tweener : ATweener<Vector4, Vector4Math, BurstUpdateJob<TweenJob<Vector4, Vector4Math>>>
-    {
-    }
-
-    public abstract class AQuaternionTweener : ATweener<Quaternion, QuaternionMath, BurstUpdateJob<TweenJob<Quaternion, QuaternionMath>>>
-    {
-    }
-
-    public abstract class AColorTweener : ATweener<Color, ColorMath, BurstUpdateJob<TweenJob<Color, ColorMath>>>
-    {
-    }
+    public abstract class AFloatTweener : ATweener<float, FloatMath, BurstUpdateJob<TweenJob<float, FloatMath>>> {}
+    public abstract class AVector2Tweener : ATweener<Vector2, Vector2Math, BurstUpdateJob<TweenJob<Vector2, Vector2Math>>> {}
+    public abstract class AVector3Tweener : ATweener<Vector3, Vector3Math, BurstUpdateJob<TweenJob<Vector3, Vector3Math>>> {}
+    public abstract class AVector4Tweener : ATweener<Vector4, Vector4Math, BurstUpdateJob<TweenJob<Vector4, Vector4Math>>> {}
+    public abstract class AQuaternionTweener : ATweener<Quaternion, QuaternionMath, BurstUpdateJob<TweenJob<Quaternion, QuaternionMath>>> {}
+    public abstract class AColorTweener : ATweener<Color, ColorMath, BurstUpdateJob<TweenJob<Color, ColorMath>>> {}
+    public abstract class ARectTweener : ATweener<Rect, RectMath, BurstUpdateJob<TweenJob<Rect, RectMath>>> {}
 }
