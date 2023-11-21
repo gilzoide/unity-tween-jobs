@@ -3,7 +3,7 @@ using Gilzoide.UpdateManager.Jobs;
 using Unity.Burst;
 using Unity.Mathematics;
 
-namespace Gilzoide.TweenJobs
+namespace Gilzoide.TweenJobs.Internal
 {
     public struct TweenJob<T, TValueMath> : IBurstUpdateJob<BurstUpdateJob<TweenJob<T, TValueMath>>>
         where T : struct

@@ -1,7 +1,7 @@
 using System;
+using Gilzoide.TweenJobs.Internal;
 using Gilzoide.TweenJobs.Math;
 using Gilzoide.UpdateManager.Jobs;
-using Gilzoide.UpdateManager.Jobs.Internal;
 using UnityEngine;
 
 namespace Gilzoide.TweenJobs
@@ -13,7 +13,6 @@ namespace Gilzoide.TweenJobs
         IValidatable
         where T : struct, IEquatable<T>
         where TValueMath : struct, IValueMath<T>
-        where TJob : struct, IInternalUpdateJob<TweenJob<T, TValueMath>>
     {
         public static readonly TValueMath ValueMath;
 

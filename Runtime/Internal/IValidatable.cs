@@ -1,4 +1,4 @@
-namespace Gilzoide.TweenJobs
+namespace Gilzoide.TweenJobs.Internal
 {
     public interface IValidatable
     {

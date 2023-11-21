@@ -1,3 +1,4 @@
+using Gilzoide.TweenJobs.Internal;
 using UnityEngine;
 
 namespace Gilzoide.TweenJobs
