@@ -52,10 +52,13 @@ namespace Gilzoide.TweenJobs
             }
             set
             {
-                if (!_referenceValue.Equals(value))
+                if (_referenceValue == null || !_referenceValue.Equals(value))
                 {
                     _referenceValue = value;
-                    SetDirty();
+                    if (_isRelative)
+                    {
+                        SetDirty();
+                    }
                 }
             }
         }
