@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Gilzoide.TweenJobs.Tweeners
+namespace Gilzoide.TweenJobs
 {
     [Serializable]
     public class EulerAnglesTweener : AVector3Tweener

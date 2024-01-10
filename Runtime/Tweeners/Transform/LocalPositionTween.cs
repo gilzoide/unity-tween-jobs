@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Gilzoide.TweenJobs.Tweeners
+namespace Gilzoide.TweenJobs
 {
     [Serializable]
     public class LocalPositionTweener : AVector3Tweener
