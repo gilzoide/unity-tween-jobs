@@ -358,9 +358,10 @@ namespace Gilzoide.TweenJobs
 
         /// <summary>
         /// Rewind the tween, setting <see cref="Value"/> to its first value.
+        /// Optionally invokes <see cref="OnRewind"/>.
         /// </summary>
         /// <param name="callOnRewind">If true, <see cref="OnRewind"/> will be called.</param>
-        public void Rewind(bool callOnRewind = true)
+        public void Rewind(bool callOnRewind)
         {
             _time = null;
             this.UnregisterInManager();
@@ -376,12 +377,21 @@ namespace Gilzoide.TweenJobs
                 OnRewind?.Invoke();
             }
         }
+        /// <summary>
+        /// Rewind the tween, setting <see cref="Value"/> to its first value.
+        /// </summary>
+        /// <seealso cref="Rewind(bool)"/>
+        public void Rewind()
+        {
+            Rewind(true);
+        }
 
         /// <summary>
         /// Complete the tween, setting <see cref="Value"/> to the final value.
+        /// Optionally invokes <see cref="OnComplete"/>.
         /// </summary>
         /// <param name="callOnComplete">If true, <see cref="OnComplete"/> will be called.</param>
-        public void Complete(bool callOnComplete = true)
+        public void Complete(bool callOnComplete)
         {
             _time = null;
             this.UnregisterInManager();
@@ -396,6 +406,14 @@ namespace Gilzoide.TweenJobs
             {
                 OnComplete?.Invoke();
             }
+        }
+        /// <summary>
+        /// Complete the tween, setting <see cref="Value"/> to the final value.
+        /// </summary>
+        /// <seealso cref="Complete(bool)"/>
+        public void Complete()
+        {
+            Complete(true);
         }
 
         /// <summary>
