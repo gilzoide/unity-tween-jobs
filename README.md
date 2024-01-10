@@ -37,6 +37,7 @@ Either:
 // MySpriteColorTween.cs
 using System;
 using Gilzoide.TweenJobs;
+using UnityEngine;
 
 // 1. Create a serializable class that inherits A*Tweener
 // Supported tween types: float, Vector2, Vector3, Vector4, Quaternion, Color and Rect
