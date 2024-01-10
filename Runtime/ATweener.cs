@@ -454,7 +454,7 @@ namespace Gilzoide.TweenJobs
         }
 #endif
 
-        protected internal void SetDirty()
+        protected void SetDirty()
         {
             _isDirty = true;
         }
