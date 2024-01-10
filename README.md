@@ -1,4 +1,6 @@
 # Tween Jobs
+[![openupm](https://img.shields.io/npm/v/com.gilzoide.tween-jobs?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.gilzoide.tween-jobs/)
+
 (WIP) Tween engine for Unity based on the C# Job System.
 
 
@@ -19,6 +21,10 @@
 
 ## How to install
 Either:
+- Use the [openupm registry](https://openupm.com/) and install this package using the [openupm-cli](https://github.com/openupm/openupm-cli):
+  ```
+  openupm add com.gilzoide.tween-jobs
+  ```
 - Install using the [Unity Package Manager](https://docs.unity3d.com/Manual/upm-ui-giturl.html) with the following URL:
   ```
   https://github.com/gilzoide/unity-tween-jobs.git#1.0.0-preview1
