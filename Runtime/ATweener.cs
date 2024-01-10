@@ -241,6 +241,7 @@ namespace Gilzoide.TweenJobs
         #endregion
 
         public event Action OnComplete;
+        public event Action OnRewind;
 
         private bool _isDirty;
         protected T? _referenceValue;
@@ -358,7 +359,8 @@ namespace Gilzoide.TweenJobs
         /// <summary>
         /// Rewind the tween, setting <see cref="Value"/> to its first value.
         /// </summary>
-        public void Rewind()
+        /// <param name="callOnRewind">If true, <see cref="OnRewind"/> will be called.</param>
+        public void Rewind(bool callOnRewind = true)
         {
             _time = null;
             this.UnregisterInManager();
@@ -368,6 +370,11 @@ namespace Gilzoide.TweenJobs
                 firstValue = ValueMath.Add(ReferenceValue, firstValue);
             }
             Value = firstValue;
+
+            if (callOnRewind)
+            {
+                OnRewind?.Invoke();
+            }
         }
 
         /// <summary>
