@@ -373,7 +373,8 @@ namespace Gilzoide.TweenJobs
         /// <summary>
         /// Complete the tween, setting <see cref="Value"/> to the final value.
         /// </summary>
-        public void Complete()
+        /// <param name="callOnComplete">If true, <see cref="OnComplete"/> will be called.</param>
+        public void Complete(bool callOnComplete = true)
         {
             _time = null;
             this.UnregisterInManager();
@@ -383,6 +384,11 @@ namespace Gilzoide.TweenJobs
                 finalValue = ValueMath.Add(ReferenceValue, finalValue);
             }
             Value = finalValue;
+
+            if (callOnComplete)
+            {
+                OnComplete?.Invoke();
+            }
         }
 
         /// <summary>
