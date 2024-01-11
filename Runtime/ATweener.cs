@@ -268,8 +268,8 @@ namespace Gilzoide.TweenJobs
             {
                 var jobData = new TweenJob<T, TValueMath>
                 {
-                    From = _isRelative ? ValueMath.Add(ReferenceValue, _from) : _from,
-                    To = _isRelative ? ValueMath.Add(ReferenceValue, _to) : _to,
+                    From = _isRelative ? ValueMath.Add(_from, ReferenceValue) : _from,
+                    To = _isRelative ? ValueMath.Add(_to, ReferenceValue) : _to,
                     Duration = Duration,
                     Speed = Speed,
                     UseUnscaledDeltaTime = UseUnscaledDeltaTime,
@@ -431,8 +431,8 @@ namespace Gilzoide.TweenJobs
             else if (_isDirty)
             {
                 _isDirty = false;
-                jobData.From = _isRelative ? ValueMath.Add(ReferenceValue, _from) : _from;
-                jobData.To = _isRelative ? ValueMath.Add(ReferenceValue, _to) : _to;
+                jobData.From = _isRelative ? ValueMath.Add(_from, ReferenceValue) : _from;
+                jobData.To = _isRelative ? ValueMath.Add(_to, ReferenceValue) : _to;
                 jobData.Duration = Duration;
                 jobData.Speed = Speed;
                 jobData.UseUnscaledDeltaTime = UseUnscaledDeltaTime;
