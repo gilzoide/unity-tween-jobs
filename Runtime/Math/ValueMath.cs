@@ -5,12 +5,18 @@ namespace Gilzoide.TweenJobs.Math
 {
     public interface IValueMath<T>
     {
+        T GetDefaultValue();
         T Add(T a, T b);
         T Interpolate(T from, T to, float t);
     }
 
     public struct FloatMath : IValueMath<float>
     {
+        public float GetDefaultValue()
+        {
+            return 0;
+        }
+
         public float Add(float a, float b)
         {
             return a + b;
@@ -24,6 +30,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct Vector2Math : IValueMath<Vector2>
     {
+        public Vector2 GetDefaultValue()
+        {
+            return Vector2.zero;
+        }
+
         public Vector2 Add(Vector2 a, Vector2 b)
         {
             return a + b;
@@ -37,6 +48,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct Vector3Math : IValueMath<Vector3>
     {
+        public Vector3 GetDefaultValue()
+        {
+            return Vector3.zero;
+        }
+
         public Vector3 Add(Vector3 a, Vector3 b)
         {
             return a + b;
@@ -50,6 +66,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct Vector4Math : IValueMath<Vector4>
     {
+        public Vector4 GetDefaultValue()
+        {
+            return Vector4.zero;
+        }
+
         public Vector4 Add(Vector4 a, Vector4 b)
         {
             return a + b;
@@ -63,6 +84,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct QuaternionMath : IValueMath<Quaternion>
     {
+        public Quaternion GetDefaultValue()
+        {
+            return Quaternion.identity;
+        }
+
         public Quaternion Add(Quaternion a, Quaternion b)
         {
             return a * b;
@@ -76,6 +102,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct ColorMath : IValueMath<Color>
     {
+        public Color GetDefaultValue()
+        {
+            return Color.black;
+        }
+
         public Color Add(Color a, Color b)
         {
             return a * b;
@@ -89,6 +120,11 @@ namespace Gilzoide.TweenJobs.Math
 
     public struct RectMath : IValueMath<Rect>
     {
+        public Rect GetDefaultValue()
+        {
+            return new Rect(0, 0, 1, 1);
+        }
+
         public Rect Add(Rect a, Rect b)
         {
             return new Rect(a.position + b.position, a.size + b.size);

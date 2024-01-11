@@ -17,10 +17,10 @@ namespace Gilzoide.TweenJobs
         public static readonly TValueMath ValueMath;
 
         [Tooltip("Initial tween value. If IsRelative is true, an initial reference value is added to this value before used.")]
-        [SerializeField] protected T _from;
+        [SerializeField] protected T _from = ValueMath.GetDefaultValue();
 
         [Tooltip("Final tween value. If IsRelative is true, an initial reference value is added to this value before used.")]
-        [SerializeField] protected T _to;
+        [SerializeField] protected T _to = ValueMath.GetDefaultValue();
 
         [Tooltip("Whether To and From values are absolute or relative to an initial reference value.")]
         [SerializeField] protected bool _isRelative;
