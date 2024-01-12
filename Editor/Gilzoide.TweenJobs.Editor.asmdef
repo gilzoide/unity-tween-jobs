@@ -1,0 +1,18 @@
+{
+    "name": "Gilzoide.TweenJobs.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:a7e22ef75f3de4e3dbf65fc910e91115"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

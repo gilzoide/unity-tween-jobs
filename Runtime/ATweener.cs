@@ -123,7 +123,7 @@ namespace Gilzoide.TweenJobs
         }
 
         /// <summary>
-        /// Tween duration, in seconds.
+        /// Tween duration, in seconds, for a single loop.
         /// Zero and negative values make the tween end in the same frame as it starts.
         /// </summary>
         public float Duration
@@ -138,6 +138,12 @@ namespace Gilzoide.TweenJobs
                 }
             }
         }
+
+        /// <summary>
+        /// Total tween duration, in seconds, accounting for all loops.
+        /// If <see cref="LoopCount"/> is negative, returns <see cref="float.MaxValue"/> since the tween will never complete.
+        /// </summary>
+        public float TotalDuration => LoopCount >= 0 ? Duration * (LoopCount + 1) : float.MaxValue;
 
         /// <summary>
         /// Tween speed multiplier.
